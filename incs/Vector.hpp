@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:44:18 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/14 00:41:41 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/14 23:30:55 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,97 @@ class Vector
 			return *this;
 		}
 
+		Vector			operator+(Vector const & rhs) const
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator+: vectors must have the same size");
+
+			Vector	ret(*this);
+			for (size_type i = 0; i < this->size(); ++i)
+				ret[i] += rhs[i];
+			return ret;
+		}
+
+		Vector &		operator+=(Vector const & rhs)
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator+=: vectors must have the same size");
+			for (size_type i = 0; i < this->size(); ++i)
+				this->_vector[i] += rhs[i];
+			return *this;
+		}
+
+		Vector			operator-(Vector const & rhs) const
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator-: vectors must have the same size");
+
+			Vector	ret(*this);
+			for (size_type i = 0; i < this->size(); ++i)
+				ret[i] -= rhs[i];
+			return ret;
+		}
+
+		Vector &		operator-=(Vector const & rhs)
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator-=: vectors must have the same size");
+			for (size_type i = 0; i < this->size(); ++i)
+				this->_vector[i] -= rhs[i];
+			return *this;
+		}
+
+		Vector			operator*(Vector const & rhs) const
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator*: vectors must have the same size");
+
+			Vector	ret(*this);
+			for (size_type i = 0; i < this->size(); ++i)
+				ret[i] *= rhs[i];
+			return ret;
+		}
+
+		Vector &		operator*=(Vector const & rhs)
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator*=: vectors must have the same size");
+			for (size_type i = 0; i < this->size(); ++i)
+				this->_vector[i] *= rhs[i];
+			return *this;
+		}
+
+		Vector			operator/(Vector const & rhs) const
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator/: vectors must have the same size");
+
+			Vector	ret(*this);
+			for (size_type i = 0; i < this->size(); ++i)
+				ret[i] /= rhs[i];
+			return ret;
+		}
+		
+		Vector &		operator/=(Vector const & rhs)
+		{
+			if (this->size() != rhs.size())
+				throw std::length_error("Vector::operator/=: vectors must have the same size");
+			for (size_type i = 0; i < this->size(); ++i)
+				this->_vector[i] /= rhs[i];
+			return *this;
+		}
+
 		reference		operator[](size_type const & i) const
 		{
 			if (i >= this->size())
 				throw std::out_of_range("Vector::operator[]: index out of range");
+			return this->_vector[i];
+		}
+
+		reference		at(size_type const & i) const
+		{
+			if (i >= this->size())
+				throw std::out_of_range("Vector::at: index out of range");
 			return this->_vector[i];
 		}
 
@@ -107,7 +194,7 @@ class Vector
 		}
 
 		public:
-			void	add(Vector const & rhs)
+			void		add(Vector const & rhs)
 			{
 				if (this->size() != rhs.size())
 					throw std::length_error("Vector::add: vectors must have the same size");
@@ -116,7 +203,7 @@ class Vector
 					this->_vector[i] += rhs[i];
 			}
 
-			void	sub(Vector const & rhs)
+			void		sub(Vector const & rhs)
 			{
 				if (this->size() != rhs.size())
 					throw std::length_error("Vector::sub: vectors must have the same size");
@@ -126,7 +213,7 @@ class Vector
 			}
 
 			template <class K>
-			void	scl(K const & k)
+			void		scl(K const & k)
 			{
 				for (size_type i = 0; i < this->size(); ++i)
 					this->_vector[i] *= k;
@@ -136,6 +223,26 @@ class Vector
 			pointer													_vector;
 			size_type												_size;
 };
+
+template <class T1, class T2>
+bool			operator==(Vector<T1> const & lhs, Vector<T2> const & rhs)
+{
+	if (lhs.size() != rhs.size())
+		return false;
+
+	for (typename Vector<T1>::size_type i = 0; i < lhs.size(); ++i)
+	{
+		if (lhs[i] != rhs[i])
+			return false;
+	}
+	return true;
+}
+
+template <class T1, class T2>
+bool			operator!=(Vector<T1> const & lhs, Vector<T2> const & rhs)
+{
+	return !(lhs == rhs);
+}
 
 template <class T>
 std::ostream &	operator<<(std::ostream & o, Vector<T> const & rhs)

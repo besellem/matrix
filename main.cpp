@@ -6,12 +6,13 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:41:06 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/14 16:08:55 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/14 23:45:04 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incs/Matrix.hpp"
 #include "incs/Vector.hpp"
+#include "incs/Complex.hpp"
 #include <iostream>
 
 // int		main(void)
@@ -42,39 +43,120 @@
 // }
 
 
+// int		main(void)
+// {
+// 	ft::Matrix<>		m1;
+// 	ft::Matrix<>		m2 = m1;
+// 	ft::Matrix<>		m3({
+// 		{1., 2., 3.},
+// 		{4., 5., 6.}
+// 	});
+
+// 	ft::Matrix<>		m4({
+// 		{-13., 0., -3.},
+// 		{42., -2., 5.}
+// 	});
+
+// 	std::cout << m3 << std::endl;
+// 	std::cout << m4 << std::endl;
+
+// 	m4.add(m3);
+// 	std::cout << m4 << std::endl;
+
+// 	m4.sub(m3);
+// 	std::cout << m4 << std::endl;
+
+// 	m4.scl(2.);
+// 	std::cout << m4 << std::endl;
+
+// 	m2 = m4;
+// 	std::cout << m2 << std::endl;
+
+// 	m1 = {
+// 		{-13134.467, 34.46767, -334.45},
+// 		{42434.234, -234., 513.45}
+// 	};
+// 	std::cout << m1 << std::endl;
+
+// 	return 0;
+// }
+
 int		main(void)
 {
-	ft::Matrix<>		m1;
-	ft::Matrix<>		m2 = m1;
-	ft::Matrix<>		m3({
-		{1., 2., 3.},
-		{4., 5., 6.}
-	});
-
-	ft::Matrix<>		m4({
-		{-13., 0., -3.},
-		{42., -2., 5.}
-	});
-
-	std::cout << m3 << std::endl;
-	std::cout << m4 << std::endl;
-
-	m4.add(m3);
-	std::cout << m4 << std::endl;
-
-	m4.sub(m3);
-	std::cout << m4 << std::endl;
-
-	m4.scl(2.);
-	std::cout << m4 << std::endl;
-
-	m2 = m4;
-	std::cout << m2 << std::endl;
-
-	m1 = {
-		{-13134.467, 34.46767, -334.45},
-		{42434.234, -234., 513.45}
+	ft::Vector<ft::Complex>		vec1 = {
+		ft::Complex(1., 1.),
+		ft::Complex(2., 2.),
+		ft::Complex(3., 3.)
 	};
+
+	ft::Vector<ft::Complex>		vec2 = {
+		ft::Complex(-1., -1.),
+		ft::Complex(-2., -2.),
+		ft::Complex(-3., -3.)
+	};
+
+	ft::Vector<>				vec3 = {1., 2., 3.};
+	ft::Vector<>				vec4 = {-1., -2., -3.};
+	
+	ft::Complex					c1(-1, -2);
+	ft::Complex					c2(3, 4);
+
+	ft::Matrix<ft::Complex>		m1 = {
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+	};
+
+	ft::Matrix<ft::Complex>		m2 = {
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+		{
+			ft::Complex(1., 1.),
+			ft::Complex(2., 2.),
+			ft::Complex(3., 3.)
+		},
+	};
+
+	std::cout << c1 + c2 << std::endl;
+	std::cout << vec1 << std::endl;
+
+	std::cout << vec3 - vec4 << std::endl;
+
+	std::cout << m1 << std::endl;
+
+	std::cout << (m1 == m2) << std::endl;
+
+	m1.add(m2);
 	std::cout << m1 << std::endl;
 
 	return 0;
