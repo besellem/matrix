@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:44:39 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/14 01:23:08 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:07:36 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,8 @@ class Matrix
 		{
 			if (this == &rhs)
 				return *this;
-			
-			// this->assign(rhs._matrix);
-			// this->_matrix = rhs._matrix;
-			
-			
+
+			this->_matrix = rhs._matrix;
 			return *this;
 		}
 
