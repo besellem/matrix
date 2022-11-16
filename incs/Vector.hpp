@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:44:18 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/14 23:30:55 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:25:15 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,28 @@ std::ostream &	operator<<(std::ostream & o, Vector<T> const & rhs)
 		o << "[" << rhs[i] << "]" << std::endl;
 	}
 	return o;
+}
+
+
+// https://www.mathbootcamps.com/linear-combinations-vectors/
+template <class T = double>
+Vector<T>	linear_combination(std::initializer_list<Vector<T>> const & u, std::initializer_list<T> const & coefs)
+{
+	if (u.size() != coefs.size())
+		throw std::length_error("linear_combination: initializer lists must have the same size");
+
+	Vector<T>	ret(coefs); // TODO: create custom constructor
+	
+	auto it_u = u.begin();
+	auto it_c = coefs.begin();
+
+	size_t		i = 0;
+	for ( ; it_u != u.end() && it_c != coefs.end(); ++it_u, ++it_c, ++i)
+	{
+		ret[i] = it_u->scl(*it_c); // FALSE
+	}
+
+	return ret;
 }
 
 __END

@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:41:06 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/14 23:45:04 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:17:01 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,16 @@ int		main(void)
 
 	m1.add(m2);
 	std::cout << m1 << std::endl;
+
+
+	ft::Vector<>	e1 = {1., 0., 0.};
+	ft::Vector<>	e2 = {0., 1., 0.};
+	ft::Vector<>	e3 = {0., 0., 1.};
+	ft::Vector<>	v1 = {1., 2., 3.};
+	ft::Vector<>	v2 = {0., 10., -100.};
+
+
+	std::cout << "linear_combination:\n" << ft::linear_combination<>({e1, e2, e3}, {10., -2., 0.5}) << std::endl;
 
 	return 0;
 }
