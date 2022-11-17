@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 19:08:47 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/14 23:30:24 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:43:18 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,10 +217,14 @@ bool			operator!=(Complex const & lhs, Complex const & rhs)
 
 std::ostream &	operator<<(std::ostream & o, Complex const & rhs)
 {
-	if (rhs.imag() < 0)
-		o << rhs.real() << " - " << -rhs.imag() << "i";
-	else
-		o << rhs.real() << " + " << rhs.imag() << "i";
+	Complex::value_type	_abs = std::abs(rhs.imag());
+
+	o << rhs.real() << (rhs.imag() < 0 ? " - " : " + ");
+
+	if (_abs != 1.)
+		o << _abs;
+	o << "i";
+
 	return o;
 }
 

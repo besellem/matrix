@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:44:18 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/16 16:25:15 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:09:21 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ class Vector
 	public:
 		Vector(void) : _vector(nullptr), _size(0)
 		{}
+
+		Vector(size_type const & size, value_type const & val = value_type())
+		{
+			this->_size = size;
+			this->_vector = new value_type[size];
+
+			// copy
+			for (size_type i = 0; i < size; ++i)
+				this->_vector[i] = val;
+		}
 
 		Vector(list_type const & list) : Vector()
 		{
@@ -254,23 +264,40 @@ std::ostream &	operator<<(std::ostream & o, Vector<T> const & rhs)
 	return o;
 }
 
-
-// https://www.mathbootcamps.com/linear-combinations-vectors/
 template <class T = double>
-Vector<T>	linear_combination(std::initializer_list<Vector<T>> const & u, std::initializer_list<T> const & coefs)
+Vector<T>	linear_combination(std::initializer_list<Vector<T>> const & vecs, std::initializer_list<T> const & coefs)
 {
-	if (u.size() != coefs.size())
+	if (vecs.size() == 0)
+		return Vector<T>();
+
+	// check if the number of vectors and coefficients are the same
+	if (vecs.size() != coefs.size())
 		throw std::length_error("linear_combination: initializer lists must have the same size");
 
-	Vector<T>	ret(coefs); // TODO: create custom constructor
-	
-	auto it_u = u.begin();
-	auto it_c = coefs.begin();
+	const typename Vector<T>::size_type	single_vector_size = vecs.begin()->size();
 
-	size_t		i = 0;
-	for ( ; it_u != u.end() && it_c != coefs.end(); ++it_u, ++it_c, ++i)
+	// check if all vectors have the same size
+	for (auto it = vecs.begin(); it != vecs.end(); ++it)
 	{
-		ret[i] = it_u->scl(*it_c); // FALSE
+		if (it->size() != single_vector_size)
+			throw std::length_error("linear_combination: all vectors must have the same size");
+	}
+
+	Vector<T>	ret(single_vector_size, T());
+	Vector<T>	tmp;
+	auto		it_vec = vecs.begin();
+	auto		it_coef = coefs.begin();
+
+	for (; it_vec != vecs.end() && it_coef != coefs.end(); ++it_vec, ++it_coef)
+	{
+		// create a copy of the current vector
+		tmp = *it_vec;
+	
+		// scale it by the current coefficient
+		tmp.scl(*it_coef);
+
+		// add it to the return vector
+		ret.add(tmp);
 	}
 
 	return ret;

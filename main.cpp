@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:41:06 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/16 16:17:01 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:37:48 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,41 @@ int		main(void)
 	ft::Vector<>	v2 = {0., 10., -100.};
 
 
-	std::cout << "linear_combination:\n" << ft::linear_combination<>({e1, e2, e3}, {10., -2., 0.5}) << std::endl;
+	std::cout << "linear_combination #00:\n" << ft::linear_combination<>({e1, e2, e3}, {10., -2., 0.5}) << std::endl;
+	std::cout << "linear_combination #01:\n" << ft::linear_combination<>({v1, v2}, {10., -2.}) << std::endl;
+	std::cout << "linear_combination #02:\n" << ft::linear_combination<>({}, {}) << std::endl;
+
+
+	ft::Vector<ft::Complex>	complex_e1 = {
+		ft::Complex(1., 1.),
+		ft::Complex(0., 0.),
+		ft::Complex(0., 0.)
+	};
+	ft::Vector<ft::Complex>	complex_e2 = {
+		ft::Complex(0., 0.),
+		ft::Complex(1., 1.),
+		ft::Complex(0., 0.)
+	};
+	ft::Vector<ft::Complex>	complex_e3 = {
+		ft::Complex(0., 0.),
+		ft::Complex(0., 0.),
+		ft::Complex(1., 1.)
+	};
+	ft::Vector<ft::Complex>	complex_v1 = {
+		ft::Complex(1., 1.),
+		ft::Complex(2., 2.),
+		ft::Complex(3., 3.)
+	};
+	ft::Vector<ft::Complex>	complex_v2 = {
+		ft::Complex(0., 0.),
+		ft::Complex(10., 10.),
+		ft::Complex(-100., -100.)
+	};
+
+
+	std::cout << "linear_combination #00:\n" << ft::linear_combination<ft::Complex>({complex_e1, complex_e2, complex_e3}, {ft::Complex(10., 10.), ft::Complex(-2., -2.), ft::Complex(0.5, 0.5)}) << std::endl;
+	std::cout << "linear_combination #01:\n" << ft::linear_combination<ft::Complex>({complex_v1, complex_v2}, {ft::Complex(10., 10.), ft::Complex(-2., -2.)}) << std::endl;
+	std::cout << "linear_combination #02:\n" << ft::linear_combination<ft::Complex>({}, {}) << std::endl;
 
 	return 0;
 }
