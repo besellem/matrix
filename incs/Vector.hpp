@@ -6,7 +6,7 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:44:18 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/17 19:09:21 by besellem         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:56:12 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,13 @@ std::ostream &	operator<<(std::ostream & o, Vector<T> const & rhs)
 	return o;
 }
 
+/*
+** linear_combination
+**
+** i.e. Say we have 3 vectors of the same size: v1, v2, v3 and we want to compute
+** the linear combination of these vectors with the coefficients {12., -2., 42.}.
+** The result will be: (v1 * 12.) + (v2 * -2.) + (v3 * 42.)
+*/
 template <class T = double>
 Vector<T>	linear_combination(std::initializer_list<Vector<T>> const & vecs, std::initializer_list<T> const & coefs)
 {
