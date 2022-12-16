@@ -6,10 +6,11 @@
 /*   By: besellem <besellem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:41:06 by besellem          #+#    #+#             */
-/*   Updated: 2022/11/17 22:37:48 by besellem         ###   ########.fr       */
+/*   Updated: 2022/12/16 15:36:33 by besellem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "incs/lerp.hpp"
 #include "incs/Matrix.hpp"
 #include "incs/Vector.hpp"
 #include "incs/Complex.hpp"
@@ -202,6 +203,19 @@ int		main(void)
 	std::cout << "linear_combination #00:\n" << ft::linear_combination<ft::Complex>({complex_e1, complex_e2, complex_e3}, {ft::Complex(10., 10.), ft::Complex(-2., -2.), ft::Complex(0.5, 0.5)}) << std::endl;
 	std::cout << "linear_combination #01:\n" << ft::linear_combination<ft::Complex>({complex_v1, complex_v2}, {ft::Complex(10., 10.), ft::Complex(-2., -2.)}) << std::endl;
 	std::cout << "linear_combination #02:\n" << ft::linear_combination<ft::Complex>({}, {}) << std::endl;
+
+
+	std::cout << ft::lerp(0., 1., 0.) << std::endl;
+	std::cout << ft::lerp(0., 1., 1.) << std::endl;
+	std::cout << ft::lerp(0., 1., .5) << std::endl;
+	std::cout << ft::lerp(21., 42., 0.3) << std::endl;
+	std::cout << ft::lerp<ft::Complex>(ft::Complex(1, -1.2), ft::Complex(234, -2.3), .5) << std::endl;
+
+	std::cout << ft::lerp(ft::Vector<>({2., 1.}), ft::Vector<>({4., 2.}), 0.) << std::endl;
+	std::cout << ft::lerp(ft::Vector<>({2., 1.}), ft::Vector<>({4., 2.}), 1.) << std::endl;
+	std::cout << ft::lerp(ft::Vector<>({2., 1.}), ft::Vector<>({4., 2.}), 0.3) << std::endl;
+
+	std::cout << ft::lerp(ft::Matrix<>({{2., 1.}, {3., 4.}}), ft::Matrix<>({{20., 10.}, {30., 40.}}), 0.5) << std::endl;
 
 	return 0;
 }
